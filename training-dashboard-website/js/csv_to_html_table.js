@@ -44,7 +44,7 @@ CsvToHtmlTable = {
                                 new Date().getMonth() + 2, 
                                 new Date().getDate()
                             );
-                            let [month, day, year] = csvData[rowIdx][1].split('/');
+                            let [year, month, day] = csvData[rowIdx][1].split('/');
                             const expiryDate = new Date(+year+2, +month - 1, +day);
 
                             console.log(csvData[rowIdx][1]);
