@@ -49,7 +49,7 @@ hr.divider {
 }
 
 /* NAVBAR STYLING STARTS */
-.navbar {
+.tdw-navbar {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -59,12 +59,16 @@ hr.divider {
     height: 60px;
 }
     
-.nav-links a {
+.tdw-nav-links a {
     color: #fff;
+}
+
+.tdw-link {
+    text-decoration: none;
 }
     
 /* LOGO */
-.logo {
+.tdw-logo {
     font-size: 24px;
     font-weight: bold;
     overflow: hidden;
@@ -74,19 +78,19 @@ hr.divider {
 }
 
 /* NAVBAR MENU */
-.menu {
+.tdw-menu {
     display: flex;
     gap: 1em;
     font-size: 18px;
 }
     
-.menu li:hover {
+.tdw-menu li:hover {
     background-color: #4D4D4D;
     border-radius: 5px;
     transition: 0.3s ease;
 }
     
-.menu li {
+.tdw-menu li {
     padding: 10px 20px;
 }
 
@@ -118,18 +122,62 @@ input[type=text] {
 }
 
 table {
-    border: 1px;
+   
     margin-left: auto;
     margin-right: auto;
-    margin-top: 75px;
+
+
     padding: 10px;
     width: 95%;
+}
+
+table {
+    border-collapse: separate;
+    border-spacing:0 20px;
 }
 
 tr {
     height: 50px;
 }
 
-td {
-    padding: auto;
+td:first-child{
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
 }
+
+td:last-child{
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+td {
+    border: solid 1px #000;
+    border-style: none solid solid none;
+    padding: 10px;;
+}
+
+th.sortable {
+    position: relative;
+    cursor: pointer;
+  }
+  
+  th.sortable::after {
+    font-family: FontAwesome;
+    content: "\f0dc";
+    position: absolute;
+    right: 8px;
+    color: #999;
+  }
+  
+  th.sortable.asc::after {
+    content: "\f0d8";
+  }
+  
+  th.sortable.desc::after {
+    content: "\f0d7";
+  }
+  
+  th.sortable:hover::after {
+    color: #333;
+  }
+  

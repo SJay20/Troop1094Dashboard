@@ -5,36 +5,71 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="style.css" />
+    
     <title>Troop 1094 Training Dashboard</title>
+    
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css"/>
+
     <link rel="stylesheet" 
-          href=
-"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"./>
+    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+          crossorigin="anonymous"/>
+    
+    <link rel="stylesheet" href="style.css" />
+    
 </head>
 
 <body>
-    <nav class="navbar">
-        <div class="logo">Troop 1094 Training Dashboard</div>
-        <ul class="nav-links">
-            <div class="menu">
-                <li><a href="./dashboard.html">Dashboard</a></li>
-                <li><a href="./calendar.html">Calendar</a></li>
-                <li><a href="./help.html">Help</a></li>
+    <nav class="tdw-navbar">
+        <div class="tdw-logo">Troop 1094 Training Dashboard</div>
+        <ul class="tdw-nav-links">
+            <div class="tdw-menu">
+                <li class="tdw-link"><a href="./dashboard.html">Dashboard</a></li>
+                <li class="tdw-link"><a href="./calendar.html">Calendar</a></li>
+                <li class="tdw-link"><a href="./help.html">Help</a></li>
             </div>
-
         </ul>
     </nav>
     
-    <i class="fa fa-search icon"></i>
-    <input class="input-field" type="text" placeholder="Search by Name">
+    <div class="container-fluid">
+        <main class="row">
+            <div class="col">
+                <div id="table-container"></div>
+            </div>
+        </main>
+    </div>
 
-    <table>
-        <tr>
-           <td>Name</td>
-           <td>Expiry Date</td>
-           <td>Upcoming Event</td>
-        </tr>
-    </table>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.2.1/js/bootstrap.bundle.min.js"></script>
+    <script src="js/jquery.csv.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+    <script src="js/csv_to_html_table.js"></script>
+
+    <script>
+        function send_email(email) {
+            if (email)
+                return "<a href='https://mail.google.com/mail/?view=cm&fs=1&to=" + email + "&su=Youth Protection Training&body=Good evening,%0D%0A%0D%0AYou are receiving this email because your Youth Protection Training (YPT) is either expired, is about to expire, or has not been completed previously.%0D%0A%0D%0A%09YPT is mandatory for all adults involved in Scout activities where youth are present.  The training takes about 60 min to complete.%0D%0A%0D%0APlease follow the instructions below to complete your training and send me the certificate when done.%0D%0A%0D%0A1. Log-in (register 1st time) at https://my.scouting.org/%0D%0A2.Click on Menu (top left), then My Dashboard%0D%0A3.Click on YPT (top center)%0D%0A4.Click on Take Course (right side)%0D%0A5.When completed, go back to My Dashboard%0D%0A6.Wait approximately 5 minutes and then click on Completions (top center)%0D%0A7.Click on the training taken to bring up your Certificate of completion.%0D%0A8.Download your certificate%0D%0A9.Send the the certificate (pdf) to me - stefaniedraisen@gmail.com%0D%0A%0D%0AThank you so much for your attention to this matter,%0D%0A%0D%0AStefanie Draisen' target='_blank'>" + email + "</a>";
+            else return "";
+        }
+
+        CsvToHtmlTable.init({
+            csv_path: "data/test-data-set.csv",
+            element: "table-container",
+            allow_download: false,
+            csv_options: {
+                separator: ",",
+                delimiter: '"'
+            },
+            datatables_options: {
+                paging: false
+            },
+            custom_formatting: [
+                [2, send_email]
+            ]
+        });
+    </script>
 
 </body>
 </html>
