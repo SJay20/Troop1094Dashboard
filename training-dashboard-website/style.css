@@ -50,48 +50,48 @@ hr.divider {
 
 /* NAVBAR STYLING STARTS */
 .tdw-navbar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 20px;
-    background-color: #3D3D3D;
-    color: #fff;
-    height: 60px;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    padding: 20px !important;
+    background-color: #3D3D3D !important;
+    color: #fff !important;
+    height: 60px !important;
 }
     
 .tdw-nav-links a {
-    color: #fff;
+    color: #fff !important;
 }
 
 .tdw-link {
-    text-decoration: none;
+    text-decoration: none !important;
 }
     
 /* LOGO */
 .tdw-logo {
-    font-size: 24px;
-    font-weight: bold;
-    overflow: hidden;
-    height: 30px;
-    vertical-align: middle;
-    word-break: break-all; 
+    font-size: 24px !important;
+    font-weight: bold !important;
+    overflow: hidden !important;
+    height: 30px !important;
+    vertical-align: middle !important;
+    word-break: break-all !important; 
 }
 
 /* NAVBAR MENU */
 .tdw-menu {
-    display: flex;
-    gap: 1em;
-    font-size: 18px;
+    display: flex !important;
+    gap: 1em !important;
+    font-size: 18px !important;
 }
     
 .tdw-menu li:hover {
-    background-color: #4D4D4D;
-    border-radius: 5px;
-    transition: 0.3s ease;
+    background-color: #4D4D4D !important;
+    border-radius: 5px !important;
+    transition: 0.3s ease !important;
 }
     
 .tdw-menu li {
-    padding: 10px 20px;
+    padding: 10px 20px !important;
 }
 
 input[type=text] {
@@ -132,7 +132,7 @@ table {
 }
 
 table {
-    border-collapse: separate;
+    border-collapse: separate !important;
     border-spacing:0 10px !important;
 }
 
@@ -148,11 +148,5 @@ td:first-child{
 td:last-child{
     border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;
-}
-
-td {
-    border: solid 1px #000;
-    border-style: none solid solid none;
-    padding: 10px;;
 }
   
