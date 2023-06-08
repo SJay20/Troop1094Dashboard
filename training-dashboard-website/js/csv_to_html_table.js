@@ -50,18 +50,18 @@ CsvToHtmlTable = {
                             console.log(csvData[rowIdx][1]);
 
                             if(expiryDate < todaysDate){
-                                var $tableBodyRow = $('<tr class="table-danger border-radius"></tr>');
-                                var $tableBodyRowTd = $("<td>!</td>");
+                                var $tableBodyRow = $('<tr style="background-color: #FFEBEB;"></tr>');
+                                var $tableBodyRowTd = $('<td style="background-color: #FF5E5E;">!!!</td>');
                                 $tableBodyRow.append($tableBodyRowTd);
                                 $tableBody.append($tableBodyRow);
                             } else if(expiryDate < twoMonthsDate){
-                                var $tableBodyRow = $('<tr class="table-warning"></tr>');
-                                var $tableBodyRowTd = $("<td>?</td>");
+                                var $tableBodyRow = $('<tr style="background-color: #FFF9E3;"></tr>');
+                                var $tableBodyRowTd = $('<td style="background-color: #FFDE6A;">?</td>');
                                 $tableBodyRow.append($tableBodyRowTd);
                                 $tableBody.append($tableBodyRow);
                             } else{
-                                var $tableBodyRow = $('<tr class="table-success"></tr>');
-                                var $tableBodyRowTd = $("<td>✓</td>");
+                                var $tableBodyRow = $('<tr style="background-color: #E7FFEC;"></tr>');
+                                var $tableBodyRowTd = $('<td style="background-color: #64DE50;">✓</td>');
                                 $tableBodyRow.append($tableBodyRowTd);
                                 $tableBody.append($tableBodyRow);
                             }

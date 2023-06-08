@@ -6,7 +6,7 @@
 }
     
 body {
-    font-family: system-ui;
+    font-family: system-ui !important;
 }
     
 a {
@@ -18,15 +18,15 @@ li {
 }
 
 .title {
-    font-size: 100px;
-    margin-left: 200px;
-    margin-top: 50px;
-    margin-bottom: 20px;
+    font-size: 100px !important;
+    margin-left: 200px !important;
+    margin-top: 50px !important;
+    margin-bottom: 20px !important;
 }
 
 .subtitle {
     font-size: 30px;
-    font-weight: normal;
+    font-weight: bold;
     margin-left: 200px;
     margin-top: 5px;
     margin-bottom: 20px;
@@ -41,6 +41,16 @@ li {
     margin-top: 20px;
     margin-bottom: 50px;
     line-height: 150%;
+}
+
+.color-text {
+    font-size: 24px;
+    font-weight: normal;
+    margin-left: 200px;
+    margin-right: 200px;
+    line-height: 150%;
+    margin-top: -50px;
+    margin-bottom: 10px;
 }
 
 hr.divider {
@@ -61,6 +71,7 @@ hr.divider {
     
 .tdw-nav-links a {
     color: #fff !important;
+    text-decoration: none !important;
 }
 
 .tdw-link {
@@ -94,20 +105,15 @@ hr.divider {
     padding: 10px 20px !important;
 }
 
-input[type=text] {
-    width: 300px;
-    float: left;
-    padding: 7px;
-    padding-left: 35px;
-    border: none;
-    margin-top: 25px;
-    margin-left: 30px;
-    font-size: 14px;
-    font-weight: 400;
-    font-family: system-ui;
-    border-radius: 20px;
-    background-color: #F2F2F2;
-    box-shadow: inset 2px 2px 20px rgba(0, 0, 0, 0.1);
+input{
+    width: 300px !important;
+    float: right !important;
+    padding: 7px !important;
+    padding-left: 20px !important;
+    font-size: 14px !important;
+    font-family: system-ui !important;
+    border-radius: 20px !important;
+    background-color: #F2F2F2 !important;
 }
 
 ::placeholder{
@@ -135,13 +141,84 @@ tr {
     height: 50px;
 }
 
-td:first-child{
-    border-top-left-radius: 20px;
-    border-bottom-left-radius: 20px;
+td {
+    font-size: 14pt;
+    padding-left: 30px;
 }
 
+td:first-child{
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    font-size: 14pt;
+    font-weight: bold;
+    width: 20px !important;
+    text-align: center !important;
+}
+
+td:nth-child(2){ padding-left: 25px !important; }
+td:nth-child(3){ padding-left: 25px !important; }
+td:nth-child(4){ padding-left: 25px !important; }
+
 td:last-child{
-    border-top-right-radius: 20px;
-    border-bottom-right-radius: 20px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.table-danger{
+    background-color: red !important;
+}
+
+label{
+    margin-top: 20px;
+    margin-bottom: -20px;
+}
+
+/* NAVBAR STYLING STARTS */
+.tdw-navbar-d {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    padding: 20px !important;
+    background-color: #3D3D3D !important;
+    color: #fff !important;
+    height: 60px !important;
+}
+    
+.tdw-nav-links-d a {
+    color: #fff !important;
+    text-decoration: none !important;
+}
+
+.tdw-link-d {
+    text-decoration: none !important;
+}
+    
+/* LOGO */
+.tdw-logo-d {
+    font-size: 24px !important;
+    font-weight: bold !important;
+    overflow: hidden !important;
+    height: 50px !important;
+    vertical-align: middle !important;
+    word-break: break-all !important; 
+    margin-top: 12px;
+}
+
+/* NAVBAR MENU */
+.tdw-menu-d {
+    display: flex !important;
+    gap: 1em !important;
+    font-size: 18px !important;
+    margin-top: 17px;
+}
+    
+.tdw-menu-d li:hover {
+    background-color: #4D4D4D !important;
+    border-radius: 5px !important;
+    transition: 0.3s ease !important;
+}
+    
+.tdw-menu-d li {
+    padding: 10px 20px !important;
 }
   
