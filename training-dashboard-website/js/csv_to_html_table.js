@@ -44,14 +44,14 @@ CsvToHtmlTable = {
                                 new Date().getMonth() + 2, 
                                 new Date().getDate()
                             );
-                            let [year, month, day] = csvData[rowIdx][1].split('/');
-                            const expiryDate = new Date(+year+2, +month - 1, +day);
+                            let [month, day, year] = csvData[rowIdx][1].split('/');
+                            const expiryDate = new Date(+year, +month - 1, +day);
 
                             console.log(csvData[rowIdx][1]);
 
                             if(expiryDate < todaysDate){
                                 var $tableBodyRow = $('<tr style="background-color: #FFEBEB;"></tr>');
-                                var $tableBodyRowTd = $('<td style="background-color: #FF5E5E;">!!!</td>');
+                                var $tableBodyRowTd = $('<td style="background-color: #FF5E5E;">!</td>');
                                 $tableBodyRow.append($tableBodyRowTd);
                                 $tableBody.append($tableBodyRow);
                             } else if(expiryDate < twoMonthsDate){
