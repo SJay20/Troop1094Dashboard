@@ -44,7 +44,12 @@ CsvToHtmlTable = {
                                 new Date().getMonth() + 2, 
                                 new Date().getDate()
                             );
-                            let [month, day, year] = csvData[rowIdx][1].split('/');
+                            const twoYearsDate = new Date(
+                                new Date().getFullYear() - 2,
+                                new Date().getMonth(), 
+                                new Date().getDate()
+                            );
+                            let [month, day, year] = csvData[rowIdx][2].split('/');
                             const expiryDate = new Date(+year, +month - 1, +day);
 
                             console.log(csvData[rowIdx][1]);
@@ -57,6 +62,11 @@ CsvToHtmlTable = {
                             } else if(expiryDate < twoMonthsDate){
                                 var $tableBodyRow = $('<tr style="background-color: #FFF9E3;"></tr>');
                                 var $tableBodyRowTd = $('<td style="background-color: #FFDE6A;">?</td>');
+                                $tableBodyRow.append($tableBodyRowTd);
+                                $tableBody.append($tableBodyRow);
+                            } else if(expiryDate < twoYearsDate){
+                                var $tableBodyRow = $('<tr style="background-color: #D3D3D3;"></tr>');
+                                var $tableBodyRowTd = $('<td style="background-color: #7D7D7D;"></td>');
                                 $tableBodyRow.append($tableBodyRowTd);
                                 $tableBody.append($tableBodyRow);
                             } else{
