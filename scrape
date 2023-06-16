@@ -1,0 +1,121 @@
+import requests
+from bs4 import BeautifulSoup
+import numpy as np
+import csv
+
+def log_in(session: requests.Session):
+    with open('login.txt', 'r') as f:
+        username, password = f.read().split('\n')[:2]
+
+    payload = {
+        'menuopenflag': 'N',
+        'Selected_Action': 'login',
+        'Menu_Item_ID': 49792,
+        'Form_ID': 7323,
+        'Pass': 1,
+        'Stack': 1,
+        'ChildRowID': 0,
+        'Current_URL': 'https://www.troopwebhost.org/formCustom.aspx?Menu_Item_ID=49792&Custom_Form_ID=1',
+        'User_Login': username,
+        'User_Password': password,
+        'Language_ID': 1,
+        'Page_Layout': 1,
+        'Report_option': 2,
+        'Custom_Form_ID': 1,
+        'FirstControl': 'User_Login',
+    }
+
+    LOGIN_URL = 'https://www.troopwebhost.org/formCustom.aspx'
+
+    p = session.post(LOGIN_URL, data=payload)
+    assert('Log Off' in p.text)
+
+
+def get_html_page(session, url):
+    response = session.get(url)
+    return response.text
+
+
+ADULT_TRAINING_URL = 'https://www.troopwebhost.org/FormList.aspx?Menu_Item_ID=45888&Stack=0'
+ACTIVE_ADULTS_URL = 'https://www.troopwebhost.org/FormDetail.aspx?Menu_Item_ID=45961&Stack=1'
+
+with requests.Session() as session:
+    session.cookies.set('Application_ID', '1338')
+    log_in(session)
+
+    session.cookies.set('RowsPerPage', 'ALL')
+
+    adult_trainings_page = get_html_page(session, ADULT_TRAINING_URL)
+    active_adults_page = get_html_page(session, ACTIVE_ADULTS_URL)
+
+    with open('adult_trainings.html', 'w') as f:
+        f.write(adult_trainings_page)
+    with open('active_adults.html', 'w') as f:
+        f.write(active_adults_page)
+
+
+columns = {
+    'Adult': 0,
+    'Expires': 2,
+    'Training': 3,
+    'Email': 4
+}
+
+email_columns = {
+    'Name': 0,
+    'Email': 1,
+}
+
+soup = BeautifulSoup(adult_trainings_page, 'html.parser').tbody
+soup2 = BeautifulSoup(active_adults_page, 'html.parser')
+
+with open('data.csv', 'w', newline='') as file:
+    writer = csv.writer(file)
+    writer.writerow(['','Name', "2 Months Before Expiry", "Expiry Date", "Email"])
+
+    for entry in soup.findAll('table'):
+        row = np.empty(5, dtype=object)
+        for tr in entry.findAll('tr', id=True):
+            column_td = tr.find('td', class_='mobile-grid-caption')
+            if(column_td.text.strip() == "Adult" or column_td.text.strip() == "Training"):
+                column = columns[column_td.text.strip()]  # could cause error if not in columns, or all_tds is empty
+                data_td = tr.find('td', class_='mobile-grid-data')
+                entry_item = data_td.text.strip()
+                row[column] = entry_item
+            elif(column_td.text.strip() == "Expires"):
+                column = columns[column_td.text.strip()]  # could cause error if not in columns, or all_tds is empty
+                data_td = tr.find('td', class_='mobile-grid-data')
+                entry_item = data_td.text.strip()
+                row[column] = entry_item[-4:] + "/" + entry_item[:2] + entry_item[2:-5]
+                
+                twoMonths = int(entry_item[:2]) - 2
+                if(twoMonths > 0): 
+                    row[column - 1] = entry_item[-4:] + "/{:02d}".format(twoMonths) + entry_item[2:-5]
+                else: 
+                    twoMonths += 12
+                    year = int(entry_item[-4:]) - 1
+                    row[column - 1] = str(year) + "/{:02d}".format(twoMonths) + entry_item[2:-5]
+
+        if(row[3] == "Youth Protection Training 2"):
+            writer.writerow(np.delete(row, 3))
+
+emails = {}
+
+entry = soup2.find_all("table")[6]
+for tr in entry.findAll('tr'):
+    row = np.empty(2, dtype=object)
+    column_td = tr.findAll("td")
+    print(column_td)
+    if(len(column_td) != 0):
+        for td in column_td:
+            if(td.text.strip() == "Name" or td.text.strip() == "Email"):
+                column = columns[td.text.strip()]  # could cause error if not in columns, or all_tds is empty
+                data_td = tr.find('td', class_='mobile-grid-data')
+                entry_item = data_td.text.strip()
+                row[column] = entry_item
+    emails[row[0]] = row[1]
+
+print(emails)
+
+with open('data.csv', 'r', newline='') as file:
+    reader = csv.reader(file)
